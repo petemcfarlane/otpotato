@@ -13,11 +13,13 @@ defmodule OTPotato.Bed do
 
   @soil_types OTPotato.Consts.soil_types()
 
-  embedded_schema do
+  @primary_key {:id, Ecto.UUID, autogenerate: true}
+  schema "beds" do
     field :origin_x, :integer
     field :origin_y, :integer
     field :length, :decimal
     field :width, :decimal
     field :soil_type, Ecto.Enum, values: @soil_types
+    belongs_to :garden, OTPotato.Garden, type: Ecto.UUID
   end
 end
