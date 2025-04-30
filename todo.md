@@ -1,7 +1,7 @@
 - [x] Create Phoenix webapp. Note: could have just used Cowboy or Bandit and Plug, Phoenix is perhaps a little heavy for a simple API, but I customised it without assets/HTML. The bonus is it's got Ecto DB adapter built in, and it's compatible with [Open API Spex](https://hexdocs.pm/open_api_spex/readme.html) which I might use for docs.
 
   mix phx.new ./ --app otpotato --module OTPotato --no-assets --no-html --no-live --no-mailer --binary-id --database postgres
-- [ ] Create a data model
+- [x] Create a data model
 - [ ] Create DB migrations
 - [ ] Script (mix task?) to import the background knowledge
 - [ ] Create an API endpoint for creating a new garden, by accepting a collection of vegetable bed descriptions. The bed descriptions will be lines of a CSV, one line per bed. The return value should either acknowledge the created beds, or an error if the bed descriptions cannot be processed.
