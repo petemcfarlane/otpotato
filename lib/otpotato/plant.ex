@@ -1,4 +1,7 @@
 defmodule OTPotato.Plant do
+  @moduledoc """
+  Represents a plant in our garden. Plant names must be unique
+  """
   use Ecto.Schema
 
   @soil_types OTPotato.Consts.soil_types()

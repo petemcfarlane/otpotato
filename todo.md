@@ -3,7 +3,7 @@
   mix phx.new ./ --app otpotato --module OTPotato --no-assets --no-html --no-live --no-mailer --binary-id --database postgres
 - [x] Create a data model
 - [ ] Create DB migrations
-- [ ] Script (mix task?) to import the background knowledge
+- [x] Use seeds to import the background knowledge
 - [ ] Create an API endpoint for creating a new garden, by accepting a collection of vegetable bed descriptions. The bed descriptions will be lines of a CSV, one line per bed. The return value should either acknowledge the created beds, or an error if the bed descriptions cannot be processed.
 - [ ] Create an API endpoint for storing a planting plan. The planting plan will consist of a CSV file, one line per plant type. The return value should be either acknowledge the created plan, or an error if the planting plan cannot be processed.
 - [ ] Create an API endpoint to get a score for a plan, given a plan identifier. The score is an average of the scores for each bed in the plan. A single bed’s score is calculated by:
