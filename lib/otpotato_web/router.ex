@@ -2,11 +2,16 @@ defmodule OTPotatoWeb.Router do
   use OTPotatoWeb, :router
 
   pipeline :api do
-    plug :accepts, ["json"]
+    plug :accepts, ["json", "csv"]
+
+    plug Plug.Parsers,
+      parsers: [:urlencoded, OTPotatoWeb.Plug.Parsers.Plain],
+      pass: ["text/*"]
   end
 
   scope "/api", OTPotatoWeb do
     pipe_through :api
+    resources "/gardens", GardenController, only: [:create]
   end
 
   # Enable LiveDashboard in development

@@ -6,7 +6,7 @@
   I opted to use UUIDs for primary keys as this is potentially more future-proof. Did have to modify the Repo config for this, and set the @primary_key attribute in each schema to autogenerate.
   I've left out timestamps for now for the sake of MVP simplicity!
 - [x] Use seeds to import the background knowledge
-- [ ] Create an API endpoint for creating a new garden, by accepting a collection of vegetable bed descriptions. The bed descriptions will be lines of a CSV, one line per bed. The return value should either acknowledge the created beds, or an error if the bed descriptions cannot be processed.
+- [x] Create an API endpoint for creating a new garden, by accepting a collection of vegetable bed descriptions. The bed descriptions will be lines of a CSV, one line per bed. The return value should either acknowledge the created beds, or an error if the bed descriptions cannot be processed.
 - [ ] Create an API endpoint for storing a planting plan. The planting plan will consist of a CSV file, one line per plant type. The return value should be either acknowledge the created plan, or an error if the planting plan cannot be processed.
 - [ ] Create an API endpoint to get a score for a plan, given a plan identifier. The score is an average of the scores for each bed in the plan. A single bed’s score is calculated by:
 the base score is 10

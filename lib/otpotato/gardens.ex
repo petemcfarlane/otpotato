@@ -1,7 +1,17 @@
 defmodule OTPotato.Gardens do
+  @moduledoc """
+  Context for creating gardens
+  """
+
   alias OTPotato.{Repo, Garden, Bed}
   alias Ecto.Changeset
 
+  @doc """
+  Create a garden
+  Requirements:
+    - at least one bed
+    - beds must not overlap
+  """
   def create(beds) do
     garden = %Garden{}
 

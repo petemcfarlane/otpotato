@@ -6,6 +6,7 @@ defmodule OTPotato.Garden do
   """
 
   @primary_key {:id, Ecto.UUID, autogenerate: true}
+  @derive {Jason.Encoder, only: [:id, :beds]}
   schema "gardens" do
     has_many :beds, OTPotato.Bed
   end
