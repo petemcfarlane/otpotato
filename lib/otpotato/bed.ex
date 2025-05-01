@@ -11,9 +11,12 @@ defmodule OTPotato.Bed do
 
   use Ecto.Schema
 
+  alias Ecto.Changeset
+
   @soil_types OTPotato.Consts.soil_types()
 
   @primary_key {:id, Ecto.UUID, autogenerate: true}
+  @derive {Jason.Encoder, only: [:id, :origin_x, :origin_y, :length, :width, :soil_type]}
   schema "beds" do
     field :origin_x, :integer
     field :origin_y, :integer
@@ -21,5 +24,15 @@ defmodule OTPotato.Bed do
     field :width, :decimal
     field :soil_type, Ecto.Enum, values: @soil_types
     belongs_to :garden, OTPotato.Garden, type: Ecto.UUID
+  end
+
+  @fields [:origin_x, :origin_y, :length, :width, :soil_type]
+  def changeset(changeset, attrs) do
+    changeset
+    |> Changeset.cast(attrs, @fields)
+    |> Changeset.validate_required(@fields)
+    |> Changeset.validate_number(:length, greater_than: 0)
+    |> Changeset.validate_number(:width, greater_than: 0)
+    |> Changeset.validate_inclusion(:soil_type, @soil_types)
   end
 end
