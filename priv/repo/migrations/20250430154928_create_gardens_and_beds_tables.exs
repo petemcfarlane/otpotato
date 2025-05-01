@@ -7,8 +7,8 @@ defmodule OTPotato.Repo.Migrations.CreateGardensTable do
     create table(:beds) do
       add :origin_x, :integer
       add :origin_y, :integer
-      add :length, :decimal
-      add :width, :decimal
+      add :length, :float
+      add :width, :float
       add :soil_type, :string
       add :garden_id, references(:gardens, on_delete: :delete_all)
     end

@@ -25,15 +25,13 @@ defmodule OTPotato.BedTest do
                  soil_type: :chalk
                })
 
-      zero = Decimal.new("0")
-
       assert [
                width:
                  {"must be greater than %{number}",
-                  [{:validation, :number}, {:kind, :greater_than}, {:number, ^zero}]},
+                  [{:validation, :number}, {:kind, :greater_than}, {:number, 0}]},
                length:
                  {"must be greater than %{number}",
-                  [{:validation, :number}, {:kind, :greater_than}, {:number, ^zero}]}
+                  [{:validation, :number}, {:kind, :greater_than}, {:number, 0}]}
              ] = errors
     end
   end

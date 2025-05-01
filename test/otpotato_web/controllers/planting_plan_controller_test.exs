@@ -16,7 +16,7 @@ defmodule OTPotatoWeb.PlantingPlanControllerTest do
     {:ok, garden: garden, bed: bed}
   end
 
-  describe("create/2") do
+  describe "create/2" do
     test "with valid data", %{bed: %{id: bed_id}} do
       conn =
         build_conn()
@@ -35,17 +35,17 @@ defmodule OTPotatoWeb.PlantingPlanControllerTest do
                    %{
                      "bed-id" => ^bed_id,
                      "plant" => "spinach",
-                     "area" => "0.5"
+                     "area" => 0.5
                    },
                    %{
                      "bed-id" => ^bed_id,
                      "plant" => "potato",
-                     "area" => "1.2"
+                     "area" => 1.2
                    },
                    %{
                      "bed-id" => ^bed_id,
                      "plant" => "tomato",
-                     "area" => "0.3"
+                     "area" => 0.3
                    }
                  ]
                }

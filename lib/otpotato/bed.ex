@@ -20,8 +20,8 @@ defmodule OTPotato.Bed do
   schema "beds" do
     field :origin_x, :integer
     field :origin_y, :integer
-    field :length, :decimal
-    field :width, :decimal
+    field :length, :float
+    field :width, :float
     field :soil_type, Ecto.Enum, values: @soil_types
     belongs_to :garden, OTPotato.Garden, type: Ecto.UUID
   end

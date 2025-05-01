@@ -16,15 +16,15 @@ defmodule OTPotatoWeb.GardenControllerTest do
                "garden" => %{
                  "beds" => [
                    %{
-                     "length" => "1.8",
-                     "width" => "2.5",
+                     "length" => 1.8,
+                     "width" => 2.5,
                      "origin_x" => 0,
                      "origin_y" => 0,
                      "soil_type" => "chalk"
                    },
                    %{
-                     "length" => "3.0",
-                     "width" => "3.0",
+                     "length" => 3.0,
+                     "width" => 3.0,
                      "origin_x" => 5,
                      "origin_y" => 3,
                      "soil_type" => "loam"

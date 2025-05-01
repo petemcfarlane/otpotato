@@ -10,7 +10,7 @@ defmodule OTPotato.PlantingPlanEntry do
     belongs_to :planting_plan, PlantingPlan, type: Ecto.UUID
     belongs_to :plant, Plant, type: Ecto.UUID
     belongs_to :bed, Bed, type: Ecto.UUID
-    field :area, :decimal
+    field :area, :float
   end
 
   @fields [:bed_id, :plant_id, :area]

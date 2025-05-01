@@ -8,7 +8,7 @@ defmodule OTPotato.Repo.Migrations.CreatePlantingPlanTables do
       add :planting_plan_id, references(:planting_plans, type: :uuid)
       add :plant_id, references(:plants, type: :uuid)
       add :bed_id, references(:beds, type: :uuid)
-      add :area, :decimal
+      add :area, :float
     end
 
     create index(:planting_plan_entries, [:planting_plan_id])
