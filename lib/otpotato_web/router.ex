@@ -13,6 +13,7 @@ defmodule OTPotatoWeb.Router do
     pipe_through :api
     resources "/gardens", GardenController, only: [:create]
     resources "/planting-plans", PlantingPlanController, only: [:create]
+    get "/planting-plans/:id/score", PlantingPlanController, :score
   end
 
   # Enable LiveDashboard in development

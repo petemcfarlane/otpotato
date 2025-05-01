@@ -9,11 +9,20 @@ defmodule OTPotatoWeb.PlantingPlanControllerTest do
         %{length: 2, width: 2, origin_x: 0, origin_y: 0, soil_type: :loam}
       ])
 
-    Repo.insert(%Plant{name: "spinach", soil_types: [:clay], benefits_from: []})
-    Repo.insert(%Plant{name: "potato", soil_types: [:chalk], benefits_from: []})
-    Repo.insert(%Plant{name: "tomato", soil_types: [:sandy], benefits_from: []})
+    {:ok, spinach} =
+      Repo.insert(%Plant{name: "spinach", soil_types: [:clay], benefits_from: []})
 
-    {:ok, garden: garden, bed: bed}
+    {:ok, potato} =
+      Repo.insert(%Plant{
+        name: "potato",
+        soil_types: [:chalk],
+        benefits_from: ["spinach", "tomato"]
+      })
+
+    {:ok, tomato} =
+      Repo.insert(%Plant{name: "tomato", soil_types: [:sandy], benefits_from: ["spinach"]})
+
+    {:ok, garden: garden, bed: bed, spinach: spinach, potato: potato, tomato: tomato}
   end
 
   describe "create/2" do
@@ -139,6 +148,41 @@ defmodule OTPotatoWeb.PlantingPlanControllerTest do
 
       assert json_response(conn, 422) == %{
                "error" => "Plant not found: okra"
+             }
+    end
+  end
+
+  describe "score/2" do
+    test "returns average score of all beds in plan", %{
+      spinach: spinach,
+      potato: potato,
+      tomato: tomato
+    } do
+      {:ok, _garden = %{beds: [bed1, bed2, bed3]}} =
+        OTPotato.Gardens.create([
+          %{length: 2, width: 2, origin_x: 0, origin_y: 0, soil_type: :loam},
+          %{length: 10, width: 10, origin_x: 2, origin_y: 2, soil_type: :chalk},
+          %{length: 3, width: 4, origin_x: 12, origin_y: 12, soil_type: :sandy}
+        ])
+
+      {:ok, planting_plan} =
+        OTPotato.PlantingPlans.create([
+          # score 9
+          %{bed_id: bed1.id, plant_id: spinach.id, area: 1.0},
+          # score 10
+          %{bed_id: bed1.id, plant_id: potato.id, area: 2.0},
+          # score 11
+          %{bed_id: bed2.id, plant_id: potato.id, area: 2.0},
+          # score 11
+          %{bed_id: bed3.id, plant_id: tomato.id, area: 3.0}
+        ])
+
+      conn =
+        build_conn()
+        |> get("/api/planting-plans/#{planting_plan.id}/score")
+
+      assert json_response(conn, 200) == %{
+               "score" => 10.25
              }
     end
   end

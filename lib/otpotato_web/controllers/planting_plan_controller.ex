@@ -44,6 +44,14 @@ defmodule OTPotatoWeb.PlantingPlanController do
     end
   end
 
+  def score(conn, %{"id" => id}) do
+    score = PlantingPlans.score(id)
+
+    conn
+    |> put_status(:ok)
+    |> json(%{score: score})
+  end
+
   defp transform_input_data(plan, plants_by_name) do
     plan
     |> Enum.reduce(

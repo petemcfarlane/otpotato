@@ -1,4 +1,5 @@
 defmodule OTPotato.PlantingPlan do
+  @moduledoc false
   use Ecto.Schema
 
   alias OTPotato.PlantingPlanEntry
