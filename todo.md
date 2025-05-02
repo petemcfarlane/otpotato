@@ -19,3 +19,21 @@ any bed with an error automatically returns 0
 - [ ] Is it documented thoroughly?
 - [ ] Add Open API Spex - nice to have
 - [ ] Ponder future iterations: In the MVP, we're not going to worry about the time that plants are sown or harvested, though that will likely be a feature we would want to add in future.
+Should we use a plant identifier or is the plant name good enough?
+
+See more, coped from the end of the Livebook:
+
+
+Throughout the project I had a few thoughts of things I might to differently, given more time:
+
+* Plants don't have an id in the background knowledge file, but when I created the model I gave them a generated uuid. This caused more issues because the other endpoints only give/return a plant name, and for some of the logic I have to look up the plant by name to get the id.
+* The API response could do with some more thought, I just returned a similar payload to the request but with generated IDs. Perhaps the create planting plan endpoint could also return the score immediately?
+* The API can only create new gardens/planting plans - it'd be very useful to be able to edit existing gardens/plans I'm sure.
+* The CSV API parsing is slightly non-standard, working with JSON would have been easier with Phoenix out-the-box.
+* I really wanted to add Open API specs, using [open_api_spex](https://hexdocs.pm/open_api_spex/3.4.0/readme.html) but I didn't have time. Hopefully the interactive nature of the Livebook has been an interesting alternative.
+* I'm fairly happy with the test coverage - I added integration tests at the Controller and Context layer - sometimes I think it's safer to not mock out the data layer. But if performance was an issue it's something I'd consider. Also using Ecto test factories would improve the code readability.
+* It'd be nice to add a UI to this app - being able to view the area of plants would be easier to see how much space we have left in each bed.
+* Using gen AI to generate a recommended planting plan, for the user to tweak, based on some params, e.g. garden dimensions, soil types.
+* Right now there is no authentication system in this app - anyone can create gardens and planting plans for any other garden. Using an auth system in front to make sure that users can only plant in their own gardens would be a good idea! This could be modelled in the DB by adding a user_id/owner_id/tenant_id column to the gardens table.
+
+
